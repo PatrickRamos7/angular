@@ -1,1 +1,28 @@
-<p>order-confirmation works!</p>
+<!-- Componente de Confirmación de Orden -->
+<div class="order-confirmation container mx-auto px-4 py-8">
+  <div class="bg-white shadow-md rounded-lg p-6 max-w-md mx-auto">
+    <div class="text-center mb-6">
+      <!-- Icono de confirmación -->
+      <svg class="mx-auto h-16 w-16 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <h2 class="text-3xl font-bold text-gray-800 mt-4">¡Compra Finalizada!</h2>
+      <p class="text-gray-600 mt-2">Gracias por su compra. Su pedido ha sido procesado con éxito.</p>
+    </div>
+
+    <div class="mb-6">
+      <h3 class="text-xl font-semibold mb-2">Detalles del Pedido</h3>
+      <p class="text-gray-600">Número de Orden: <span class="font-medium">{{ orderNumber }}</span></p>
+      <p class="text-gray-600">Fecha: <span class="font-medium">{{ orderDate | date:'dd/MM/yyyy HH:mm' }}</span></p>
+    </div>
+
+    <div class="text-center">
+      <button 
+        (click)="returnToHome()" 
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      >
+        Volver a la Tienda
+      </button>
+    </div>
+  </div>
+</div>

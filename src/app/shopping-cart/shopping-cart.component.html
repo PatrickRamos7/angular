@@ -1,1 +1,43 @@
-<p>shopping-cart works!</p>
+<div class="shopping-cart container mx-auto px-4 py-8">
+  <h2 class="text-3xl font-bold mb-6 text-gray-800">Carrito de Compra</h2>
+
+  <div *ngIf="cartItems.length > 0" class="space-y-4">
+    <div *ngFor="let item of cartItems; let i = index" class="bg-white p-4 rounded-lg shadow-md flex flex-col sm:flex-row justify-between items-center">
+      <div class="flex items-center mb-4 sm:mb-0">
+        <div>
+          <h3 class="text-xl font-semibold text-gray-800">{{ item.name }}</h3>
+          <p class="text-gray-700">ISBN: {{ item.isbn }}</p>
+        </div>
+      </div>
+      <div class="flex items-center">
+        <div class="flex items-center mr-4">
+          <button (click)="updateQuantity(item, item.quantity - 1)" class="bg-gray-200 text-gray-700 px-2 py-1 rounded-l">-</button>
+          <span class="px-4">{{item.quantity}}</span>
+          <button (click)="updateQuantity(item, item.quantity + 1)" class="bg-gray-200 text-gray-700 px-2 py-1 rounded-r">+</button>
+        </div>
+        <p class="text-lg font-semibold text-blue-600 mr-4">S/ {{ (item.current_price * item.quantity).toFixed(2) }}</p>
+        <button (click)="removeItem(i)" class="text-red-500 hover:text-red-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="bg-gray-100 p-4 rounded-lg mt-8">
+      <h3 class="text-2xl font-semibold mb-4">Resumen del Pedido</h3>
+      <div class="flex justify-between items-center">
+        <span class="text-lg">Total:</span>
+        <span class="text-2xl font-bold text-blue-600">S/ {{ total.toFixed(2) }}</span>
+      </div>
+      <button (click)="proceedToCheckout()" class="mt-4 w-full bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors">
+        Proceder al Pago
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="cartItems.length === 0" class="text-center text-gray-600">
+    <p class="text-xl">Su carrito está vacío.</p>
+    <a routerLink="/buscar" class="text-blue-500 hover:underline mt-4 inline-block">Continuar Comprando</a>
+  </div>
+</div>

@@ -6,11 +6,12 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/search', pathMatch: 'full' },
-  { path: 'search', component: BookSearchComponent },
-  { path: 'cart', component: ShoppingCartComponent },
+  { path: 'buscar', component: BookSearchComponent },
+  { path: 'carrito', component: ShoppingCartComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'confirmation', component: OrderConfirmationComponent }
+  { path: 'confirmacion', component: OrderConfirmationComponent },
+  { path: '', redirectTo: '/buscar', pathMatch: 'full' },
+
 ];
 
 @NgModule({

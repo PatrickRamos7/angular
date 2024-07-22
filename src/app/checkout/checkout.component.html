@@ -1,1 +1,125 @@
-<p>checkout works!</p>
+<div class="checkout container mx-auto px-4 py-8">
+  <h2 class="text-3xl font-bold mb-6 text-gray-800">Finalizar Compra</h2>
+
+  <form (ngSubmit)="onSubmit()" #checkoutForm="ngForm" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <!-- Datos del cliente -->
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="first_name">
+        Nombre
+      </label>
+      <input 
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="first_name"
+        type="text"
+        placeholder="Ingrese su nombre"
+        [(ngModel)]="clientData.first_name"
+        name="first_name"
+        required
+      >
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="last_name">
+        Apellido
+      </label>
+      <input 
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="last_name"
+        type="text"
+        placeholder="Ingrese su apellido"
+        [(ngModel)]="clientData.last_name"
+        name="last_name"
+        required
+      >
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+        Correo Electrónico
+      </label>
+      <input 
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="email"
+        type="email"
+        placeholder="Ingrese su correo electrónico"
+        [(ngModel)]="clientData.email"
+        name="email"
+        required
+        email
+      >
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="doc_type">
+        Tipo de Documento
+      </label>
+      <select 
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="doc_type"
+        [(ngModel)]="clientData.doc_type"
+        name="doc_type"
+        required
+      >
+        <option [ngValue]="1">DNI</option>
+        <option [ngValue]="2">RUC</option>
+        <option [ngValue]="3">Carné de extranjería</option>
+      </select>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="doc_number">
+        Número de Documento
+      </label>
+      <input 
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="doc_number"
+        type="text"
+        placeholder="Ingrese su número de documento"
+        [(ngModel)]="clientData.doc_number"
+        name="doc_number"
+        required
+      >
+    </div>
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="phone">
+        Teléfono
+      </label>
+      <input 
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="phone"
+        type="tel"
+        placeholder="Ingrese su número de teléfono"
+        [(ngModel)]="clientData.phone"
+        name="phone"
+        required
+      >
+    </div>
+
+    <!-- Resumen de la compra -->
+    <div class="mb-6">
+      <h3 class="text-xl font-semibold mb-2">Resumen de la Compra</h3>
+      <div *ngFor="let item of cartItems" class="flex justify-between items-center mb-2">
+        <span>{{ item.name }} (x{{ item.quantity }})</span>
+        <span class="font-semibold">S/ {{ (item.current_price * item.quantity).toFixed(2) }}</span>
+      </div>
+      <div class="border-t pt-2 mt-2">
+        <div class="flex justify-between items-center font-bold">
+          <span>Total:</span>
+          <span>S/ {{ total.toFixed(2) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <button 
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="submit"
+        [disabled]="!checkoutForm.form.valid"
+      >
+        Confirmar Compra
+      </button>
+      <a 
+        class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+        routerLink="/carrito"
+      >
+        Volver al Carrito
+      </a>
+    </div>
+  </form>
+</div>
